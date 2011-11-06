@@ -1,0 +1,21 @@
+#Visual Studio
+[Ob]bj
+[Bb]in
+[Db]ebug
+[Bb]uild
+[Rr]elease
+[Cc]ache
+*.vspscc
+*.vssscc
+*.suo
+*.user
+
+
+#NUnit
+[Tt]est[Rr]esult
+
+#Generic
+*.log
+*.bak
+*.DS_Store
+[Tt]humbs.db
