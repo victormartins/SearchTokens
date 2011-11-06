@@ -8,23 +8,28 @@ namespace SearchTokens
     public class StringTokens
     {
         private StringBuilder lettersCache;
-        private List<string> result;        
+        private List<string> result;
+        private string WORD_GATHERING_CHARS = "\"'";
+        private bool trimWhiteSpace = false;
 
         public StringTokens() {
             lettersCache = new StringBuilder();
             result = new List<string>();            
         }
 
-        public List<string> ForSearch(string words)
+        public List<string> ForSearch(string words, bool trimWhiteSpace)
         {
+            this.trimWhiteSpace = trimWhiteSpace;
             bool gatheringWord = false;
-                      
+            lettersCache = new StringBuilder();
+            result = new List<string>();
+
             foreach (char charCode in words)
             {
                 string letter = charCode.ToString();
 
 
-                if (letter.ToString() == "\"")
+                if (IsWordGatherer(letter))
                 {
                     gatheringWord = !gatheringWord;
                     continue;
@@ -44,23 +49,44 @@ namespace SearchTokens
                 else
                 {
                     lettersCache.Append(letter);
-                }                
+                }
             }
 
-            end();
+            split();
 
             return result;
         }
 
-        private void end()
+
+        public List<string> ForSearch(string words)
         {
-            result.Add(lettersCache.ToString());
+            return this.ForSearch(words, false);
         }
 
-        private void split()
-        {
-            result.Add(lettersCache.ToString());
-            lettersCache = new StringBuilder();
-        }
+        #region helpers
+            private bool IsWordGatherer(string letter)
+            {
+                return WORD_GATHERING_CHARS.Contains(letter.ToString());
+            }
+
+            private void split()
+            {
+                string s = lettersCache.ToString();
+                
+                if (trimWhiteSpace)
+                {
+                    s = s.Trim();    
+                }
+
+                if (s != String.Empty)
+                {
+                    result.Add(s);
+                }
+
+                lettersCache = new StringBuilder();
+            }
+
+        #endregion
+
     }
 }
