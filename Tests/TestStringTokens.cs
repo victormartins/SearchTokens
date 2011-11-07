@@ -99,10 +99,8 @@ namespace Tests
         [Test]
         public void KeepWhiteSpace()
         {
-            SearchTokensOption options = new SearchTokensOption();
-            options.TrimWhiteSpace = false;
-            SearchTokens stKeep = new SearchTokens(options);
-            List<string> words = stKeep.ForSearch(" ' foo ' 'bar ' ' simon'");
+            
+            List<string> words = st.ForSearch(" ' foo ' 'bar ' ' simon'");
             Assert.AreEqual(3, words.Count);            
             Assert.AreEqual(" foo ", words[0]);
             Assert.AreEqual("bar ", words[1]);
@@ -112,7 +110,10 @@ namespace Tests
         [Test]
         public void TrimWhiteSpace()
         {
-            List<string> words = st.ForSearch(" ' foo ' 'bar ' ' simon' 'Victor Daniel Martins'");
+            SearchTokensOption options = new SearchTokensOption();
+            options.TrimWhiteSpace = true;
+            SearchTokens stTrim = new SearchTokens(options);
+            List<string> words = stTrim.ForSearch(" ' foo ' 'bar ' ' simon' 'Victor Daniel Martins'");
             Assert.AreEqual(4, words.Count);            
             Assert.AreEqual("foo", words[0]);
             Assert.AreEqual("bar", words[1]);
@@ -123,7 +124,7 @@ namespace Tests
         [Test]
         public void IgnoreEmptyStrings()
         {
-            List<string> words = st.ForSearch(" ' foo ' 'bar ' ' simon'");
+            List<string> words = st.ForSearch(" '' 'foo' 'bar' 'simon' ''");
             Assert.AreEqual(3, words.Count);
             Assert.AreEqual("foo", words[0]);
             Assert.AreEqual("bar", words[1]);
@@ -166,13 +167,29 @@ namespace Tests
             SearchTokensOption options = new SearchTokensOption();
             options.WordGatheringChars = "|%";
             SearchTokens stKeep = new SearchTokens(options);
-            List<string> words = stKeep.ForSearch("|foo||bar| one two %three four");
+            List<string> words = stKeep.ForSearch("|foo ||bar%   one  two %three four ");
             Assert.AreEqual(5, words.Count);
-            Assert.AreEqual("foo", words[0]);
+            Assert.AreEqual("foo ", words[0]);
             Assert.AreEqual("bar", words[1]);
             Assert.AreEqual("one", words[2]);
             Assert.AreEqual("two", words[3]);
-            Assert.AreEqual("three four", words[4]); 
+            Assert.AreEqual("three four ", words[4]); 
+
+        }
+
+        [Test]
+        public void TrimAndChangeWordGatheringChars()
+        {
+            SearchTokensOption options = new SearchTokensOption();
+            options.WordGatheringChars = "|%";            
+            SearchTokens stKeep = new SearchTokens(options);
+            List<string> words = stKeep.ForSearch("|foo ||bar%   one  two %three four       ");
+            Assert.AreEqual(5, words.Count);
+            Assert.AreEqual("foo ", words[0]);
+            Assert.AreEqual("bar", words[1]);
+            Assert.AreEqual("one", words[2]);
+            Assert.AreEqual("two", words[3]);
+            Assert.AreEqual("three four       ", words[4]);
 
         }
 

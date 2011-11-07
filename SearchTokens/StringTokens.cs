@@ -97,7 +97,7 @@ namespace StringHelpers
         public SearchTokensOption()
         {
             WordGatheringChars = "\"'";
-            TrimWhiteSpace = true;
+            TrimWhiteSpace = false;
         }
 
         public string WordGatheringChars { get; set; }
