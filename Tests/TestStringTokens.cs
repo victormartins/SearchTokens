@@ -125,5 +125,14 @@ namespace Tests
             Assert.AreEqual("bar", words[1]);
             Assert.AreEqual("simon", words[2]);
         }
+
+        [Test]
+        public void BreakAfterQuoteEvenIfNoSpace()
+        {
+            List<string> words = st.ForSearch("'foo'bar");
+            Assert.AreEqual(2, words.Count);
+            Assert.AreEqual("foo", words[0]);
+            Assert.AreEqual("bar", words[1]);            
+        }
     }
 }

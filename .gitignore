@@ -12,7 +12,7 @@
 
 
 #NUnit
-[Tt]est[Rr]esult
+[Tt]est[Rr]esult.xml
 
 #Generic
 *.log

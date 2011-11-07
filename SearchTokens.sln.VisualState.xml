@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <VisualState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ShowCheckBoxes="false">
-  <TopNode>[0-1000]C:\Documents and Settings\Administrator\My Documents\Visual Studio 2008\Projects\SearchTokens\SearchTokens.sln</TopNode>
-  <SelectedNode>[0-1011]Tests.TestStringTokens.TrimWhiteSpace</SelectedNode>
+  <TopNode>[0-1000]C:\Users\vdmartins\Documents\Visual Studio 2008\Projects\SearchTokens\SearchTokens.sln</TopNode>
+  <SelectedNode>[0-1002]Tests.TestStringTokens</SelectedNode>
   <ExcludeCategories>false</ExcludeCategories>
   <Nodes>
-    <Node UniqueName="[0-1000]C:\Documents and Settings\Administrator\My Documents\Visual Studio 2008\Projects\SearchTokens\SearchTokens.sln" Expanded="true" />
-    <Node UniqueName="[0-1012]C:\Documents and Settings\Administrator\My Documents\Visual Studio 2008\Projects\SearchTokens\Tests\bin\Debug\Tests.dll" Expanded="true" />
-    <Node UniqueName="[0-1013]Tests" Expanded="true" />
+    <Node UniqueName="[0-1000]C:\Users\vdmartins\Documents\Visual Studio 2008\Projects\SearchTokens\SearchTokens.sln" Expanded="true" />
+    <Node UniqueName="[0-1013]C:\Users\vdmartins\Documents\Visual Studio 2008\Projects\SearchTokens\Tests\bin\Debug\Tests.dll" Expanded="true" />
+    <Node UniqueName="[0-1014]Tests" Expanded="true" />
     <Node UniqueName="[0-1002]Tests.TestStringTokens" Expanded="true" />
   </Nodes>
 </VisualState>

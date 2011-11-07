@@ -28,9 +28,12 @@ namespace SearchTokens
             {
                 string letter = charCode.ToString();
 
-
                 if (IsWordGatherer(letter))
                 {
+                    if (gatheringWord)
+                    {
+                        split();
+                    }
                     gatheringWord = !gatheringWord;
                     continue;
                 }
