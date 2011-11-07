@@ -8,18 +8,24 @@ namespace SearchTokens
     public class StringTokens
     {
         private StringBuilder lettersCache;
-        private List<string> result;
-        private string WORD_GATHERING_CHARS = "\"'";
-        private bool trimWhiteSpace = false;
+        private List<string> result;                
+        private SearchTokensOption options = new SearchTokensOption();
 
-        public StringTokens() {
+        public StringTokens(SearchTokensOption options)
+        {
+            this.options = options;
             lettersCache = new StringBuilder();
             result = new List<string>();            
         }
 
-        public List<string> ForSearch(string words, bool trimWhiteSpace)
-        {
-            this.trimWhiteSpace = trimWhiteSpace;
+        public StringTokens() {
+            lettersCache = new StringBuilder();
+            result = new List<string>();                    
+        }
+
+
+        public List<string> ForSearch(string words)
+        {            
             bool gatheringWord = false;
             lettersCache = new StringBuilder();
             result = new List<string>();
@@ -30,11 +36,8 @@ namespace SearchTokens
 
                 if (IsWordGatherer(letter))
                 {
-                    if (gatheringWord)
-                    {
-                        split();
-                    }
                     gatheringWord = !gatheringWord;
+                    CleanCacheAndAddToResult();
                     continue;
                 }
 
@@ -46,7 +49,7 @@ namespace SearchTokens
                     }
                     else
                     {
-                        split();
+                        CleanCacheAndAddToResult();
                     }
                 }
                 else
@@ -55,28 +58,24 @@ namespace SearchTokens
                 }
             }
 
-            split();
+            CleanCacheAndAddToResult();
 
             return result;
         }
 
 
-        public List<string> ForSearch(string words)
-        {
-            return this.ForSearch(words, false);
-        }
 
         #region helpers
             private bool IsWordGatherer(string letter)
             {
-                return WORD_GATHERING_CHARS.Contains(letter.ToString());
+                return options.WordGatheringChars.Contains(letter.ToString());
             }
 
-            private void split()
+            private void CleanCacheAndAddToResult()
             {
                 string s = lettersCache.ToString();
                 
-                if (trimWhiteSpace)
+                if (options.TrimWhiteSpace)
                 {
                     s = s.Trim();    
                 }
@@ -91,5 +90,17 @@ namespace SearchTokens
 
         #endregion
 
+    }
+
+    public class SearchTokensOption
+    {
+        public SearchTokensOption()
+        {
+            WordGatheringChars = "\"'";
+            TrimWhiteSpace = true;
+        }
+
+        public string WordGatheringChars { get; set; }
+        public bool TrimWhiteSpace { get; set; }
     }
 }
