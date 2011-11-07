@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
-using SearchTokens;
+using StringHelpers;
 
 namespace Tests
 {
     [TestFixture]
-    public class TestStringTokens
+    public class TestSearchTokens
     {
-        public StringTokens st;
+        public SearchTokens st;
         [SetUp]
         public void Setup() {
-            st = new StringTokens();
+            st = new SearchTokens();
         }
 
         [TearDown]
@@ -101,7 +101,7 @@ namespace Tests
         {
             SearchTokensOption options = new SearchTokensOption();
             options.TrimWhiteSpace = false;
-            StringTokens stKeep = new StringTokens(options);
+            SearchTokens stKeep = new SearchTokens(options);
             List<string> words = stKeep.ForSearch(" ' foo ' 'bar ' ' simon'");
             Assert.AreEqual(3, words.Count);            
             Assert.AreEqual(" foo ", words[0]);
@@ -165,7 +165,7 @@ namespace Tests
         {
             SearchTokensOption options = new SearchTokensOption();
             options.WordGatheringChars = "|%";
-            StringTokens stKeep = new StringTokens(options);
+            SearchTokens stKeep = new SearchTokens(options);
             List<string> words = stKeep.ForSearch("|foo||bar| one two %three four");
             Assert.AreEqual(5, words.Count);
             Assert.AreEqual("foo", words[0]);

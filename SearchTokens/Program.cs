@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SearchTokens
+namespace StringHelpers
 {
     class Program
     {
         static void Main(string[] args)
         {
 
-            StringTokens st = new StringTokens();
+            SearchTokens st = new SearchTokens();
             List<string> words;
 
             string word = String.Empty;

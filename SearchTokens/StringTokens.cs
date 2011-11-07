@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SearchTokens
+namespace StringHelpers
 {
-    public class StringTokens
+    public class SearchTokens
     {
         private StringBuilder lettersCache;
         private List<string> result;                
         private SearchTokensOption options = new SearchTokensOption();
 
-        public StringTokens(SearchTokensOption options)
+        public SearchTokens(SearchTokensOption options)
         {
             this.options = options;
             lettersCache = new StringBuilder();
             result = new List<string>();            
         }
 
-        public StringTokens() {
+        public SearchTokens() {
             lettersCache = new StringBuilder();
             result = new List<string>();                    
         }
