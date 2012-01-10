@@ -20,7 +20,7 @@ namespace Tests
         public void TearDown() { 
         
         }
-
+        
         [Test]
         public void TwoWords() {         
             List<string> words = st.ForSearch("foo bar");
@@ -159,7 +159,6 @@ namespace Tests
             Assert.AreEqual("asd%", words[1]);
             Assert.AreEqual("rere %>> <<", words[2]);
         }
-
 
         [Test]
         public void ChangeWordGatheringChars()

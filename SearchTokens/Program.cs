@@ -11,27 +11,23 @@ namespace StringHelpers
         {
 
             SearchTokens st = new SearchTokens();
-            List<string> words;
+            List<string> tokens;
 
-            string word = String.Empty;
+            string words = String.Empty;
             Console.WriteLine("Press \"quit\" to exit.");
-            while (word != "quit")
+            while (words != "quit")
             {
-                word = Console.ReadLine();
+                words = Console.ReadLine();
                 Console.WriteLine("");
-                words = st.ForSearch(word);
+                tokens = st.ForSearch(words);
                 
-                foreach (string s in words)
+                foreach (string token in tokens)
                 {
-                    Console.Write("[" + s + "] ");    
+                    Console.Write("[" + token + "] ");    
                 }
                 Console.WriteLine("");
                 Console.WriteLine("");
             }
-            
-
-
-
         }
     }
 }
