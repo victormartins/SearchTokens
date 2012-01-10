@@ -25,8 +25,8 @@ namespace Tests
         public void TwoWords() {         
             List<string> words = st.ForSearch("foo bar");
             Assert.AreEqual(2, words.Count);
-            Assert.AreEqual("foo", words[0]);
-            Assert.AreEqual("bar", words[1]);
+            Assert.Contains("foo", words);
+            Assert.Contains("bar", words);
         }
 
         [Test]
@@ -34,13 +34,13 @@ namespace Tests
         {
             List<string> words = st.ForSearch("foo bar");
             Assert.AreEqual(2, words.Count);
-            Assert.AreEqual("foo", words[0]);
-            Assert.AreEqual("bar", words[1]);
+            Assert.Contains("foo", words);
+            Assert.Contains("bar", words);
 
             words = st.ForSearch("foo bar");
             Assert.AreEqual(2, words.Count);
-            Assert.AreEqual("foo", words[0]);
-            Assert.AreEqual("bar", words[1]);
+            Assert.Contains("foo", words);
+            Assert.Contains("bar", words);
         }
 
         [Test]
@@ -73,13 +73,13 @@ namespace Tests
         {
             List<string> words = st.ForSearch("Simon Templar \"Maximus Decimus\" foo bar \"Regina Spektor\" blah");
             Assert.AreEqual(7, words.Count);
-            Assert.AreEqual("Simon", words[0]);
-            Assert.AreEqual("Templar", words[1]);
-            Assert.AreEqual("Maximus Decimus", words[2]);
-            Assert.AreEqual("foo", words[3]);
-            Assert.AreEqual("bar", words[4]);
-            Assert.AreEqual("Regina Spektor", words[5]);
-            Assert.AreEqual("blah", words[6]);
+            Assert.Contains("Simon", words);
+            Assert.Contains("Templar", words);
+            Assert.Contains("Maximus Decimus", words);
+            Assert.Contains("foo", words);
+            Assert.Contains("bar", words);
+            Assert.Contains("Regina Spektor", words);
+            Assert.Contains("blah", words);
         }
 
         [Test]
@@ -87,13 +87,13 @@ namespace Tests
         {
             List<string> words = st.ForSearch("Simon Templar 'Maximus Decimus\" foo bar 'Regina Spektor' blah");
             Assert.AreEqual(7, words.Count);
-            Assert.AreEqual("Simon", words[0]);
-            Assert.AreEqual("Templar", words[1]);
-            Assert.AreEqual("Maximus Decimus", words[2]);
-            Assert.AreEqual("foo", words[3]);
-            Assert.AreEqual("bar", words[4]);
-            Assert.AreEqual("Regina Spektor", words[5]);
-            Assert.AreEqual("blah", words[6]);
+            Assert.Contains("Simon", words);
+            Assert.Contains("Templar", words);
+            Assert.Contains("Maximus Decimus", words);
+            Assert.Contains("foo", words);
+            Assert.Contains("bar", words);
+            Assert.Contains("Regina Spektor", words);
+            Assert.Contains("blah", words);
         }
 
         [Test]
@@ -155,9 +155,9 @@ namespace Tests
         {
             List<string> words = st.ForSearch("asd% asd%'rere %>> <<'");
             Assert.AreEqual(3, words.Count);
-            Assert.AreEqual("asd%", words[0]);
-            Assert.AreEqual("asd%", words[1]);
-            Assert.AreEqual("rere %>> <<", words[2]);
+            Assert.Contains("asd%", words);
+            Assert.Contains("asd%", words);
+            Assert.Contains("rere %>> <<", words);
         }
 
         [Test]
@@ -168,11 +168,12 @@ namespace Tests
             SearchTokens stKeep = new SearchTokens(options);
             List<string> words = stKeep.ForSearch("|foo ||bar%   one  two %three four ");
             Assert.AreEqual(5, words.Count);
-            Assert.AreEqual("foo ", words[0]);
-            Assert.AreEqual("bar", words[1]);
-            Assert.AreEqual("one", words[2]);
-            Assert.AreEqual("two", words[3]);
-            Assert.AreEqual("three four ", words[4]); 
+            Assert.Contains("foo ", words);
+            Assert.Contains("bar", words);
+            Assert.Contains("one", words);
+            Assert.Contains("two", words);
+            Assert.Contains("three four ", words);
+
 
         }
 
@@ -184,11 +185,11 @@ namespace Tests
             SearchTokens stKeep = new SearchTokens(options);
             List<string> words = stKeep.ForSearch("|foo ||bar%   one  two %three four       ");
             Assert.AreEqual(5, words.Count);
-            Assert.AreEqual("foo ", words[0]);
-            Assert.AreEqual("bar", words[1]);
-            Assert.AreEqual("one", words[2]);
-            Assert.AreEqual("two", words[3]);
-            Assert.AreEqual("three four       ", words[4]);
+            Assert.Contains("foo ", words);
+            Assert.Contains("bar", words);
+            Assert.Contains("one", words);
+            Assert.Contains("two", words);
+            Assert.Contains("three four       ", words);
 
         }
 

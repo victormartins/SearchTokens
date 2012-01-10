@@ -7,28 +7,44 @@ namespace StringHelpers
 {
     public class SearchTokens
     {
-        private StringBuilder lettersCache;
-        private List<string> result;                
+        private StringBuilder lettersCache;        
+        private List<string> agregatedWords; //words that were between WordGatheringChars
+        private List<string> singularWords;
         private SearchTokensOption options = new SearchTokensOption();
 
         public SearchTokens(SearchTokensOption options)
         {
             this.options = options;
             lettersCache = new StringBuilder();
-            result = new List<string>();            
+            initializeLists(); 
         }
 
         public SearchTokens() {
             lettersCache = new StringBuilder();
-            result = new List<string>();                    
+            initializeLists(); ;                      
         }
 
+        private void initializeLists()
+        {
+            agregatedWords = new List<string>();
+            singularWords = new List<string>();
+        }
 
         public List<string> ForSearch(string words)
-        {            
+        {
+            initializeLists();
+            List<string> result;
+            TokenizeWords(words);
+            agregatedWords.AddRange(singularWords);
+            result = agregatedWords;
+
+            return result;
+        }
+
+        private void TokenizeWords(string words)
+        {
             bool gatheringWord = false;
             lettersCache = new StringBuilder();
-            result = new List<string>();
 
             foreach (char charCode in words)
             {
@@ -37,7 +53,7 @@ namespace StringHelpers
                 if (IsWordGatherer(letter))
                 {
                     gatheringWord = !gatheringWord;
-                    CleanCacheAndAddToResult();
+                    CleanCacheAndAddToAgregatedWords();
                     continue;
                 }
 
@@ -49,7 +65,7 @@ namespace StringHelpers
                     }
                     else
                     {
-                        CleanCacheAndAddToResult();
+                        CleanCacheAndAddToSingularWords();
                     }
                 }
                 else
@@ -58,9 +74,7 @@ namespace StringHelpers
                 }
             }
 
-            CleanCacheAndAddToResult();
-
-            return result;
+            CleanCacheAndAddToAgregatedWords();
         }
 
 
@@ -71,18 +85,28 @@ namespace StringHelpers
                 return options.WordGatheringChars.Contains(letter.ToString());
             }
 
-            private void CleanCacheAndAddToResult()
+            private void CleanCacheAndAddToAgregatedWords()
+            {
+                CleanCacheAndAddToList(agregatedWords);
+            }
+
+            private void CleanCacheAndAddToSingularWords()
+            {
+                CleanCacheAndAddToList(singularWords);
+            }
+
+            private void CleanCacheAndAddToList(List<string> list)
             {
                 string s = lettersCache.ToString();
-                
+
                 if (options.TrimWhiteSpace)
                 {
-                    s = s.Trim();    
+                    s = s.Trim();
                 }
 
                 if (s != String.Empty)
                 {
-                    result.Add(s);
+                    list.Add(s);
                 }
 
                 lettersCache = new StringBuilder();
