@@ -193,5 +193,15 @@ namespace Tests
 
         }
 
+        [Test]
+        public void TokensDescriminatedByType() {
+            SearchTokens st = new SearchTokens();
+            TokenLists result = st.ForSearchDescriminated("this \"is a\" test \"embrace your selfs\" the winter is comming!");
+            Assert.AreEqual(2, result.AgregatedWords.Count);
+            Assert.Contains("is a", result.AgregatedWords);
+            Assert.Contains("embrace your selfs", result.AgregatedWords);
+
+            Assert.AreEqual(6, result.SingularWords.Count);
+        }
     }
 }

@@ -30,6 +30,11 @@ namespace StringHelpers
             singularWords = new List<string>();
         }
 
+        /// <summary>
+        /// Returns a list with all tokens detected
+        /// </summary>
+        /// <param name="words"></param>
+        /// <returns></returns>
         public List<string> ForSearch(string words)
         {
             initializeLists();
@@ -37,6 +42,21 @@ namespace StringHelpers
             TokenizeWords(words);
             agregatedWords.AddRange(singularWords);
             result = agregatedWords;
+
+            return result;
+        }
+        /// <summary>
+        /// Returns an object with the tokens descriminated by type
+        /// </summary>
+        /// <param name="words"></param>
+        /// <returns></returns>
+        public TokenLists ForSearchDescriminated(string words) {
+            initializeLists();
+            TokenizeWords(words);
+
+            TokenLists result = new TokenLists();
+            result.AgregatedWords = agregatedWords;
+            result.SingularWords = singularWords;
 
             return result;
         }
@@ -73,8 +93,7 @@ namespace StringHelpers
                     lettersCache.Append(letter);
                 }
             }
-
-            CleanCacheAndAddToAgregatedWords();
+            CleanCacheAndAddToSingularWords();            
         }
 
 
@@ -127,4 +146,11 @@ namespace StringHelpers
         public string WordGatheringChars { get; set; }
         public bool TrimWhiteSpace { get; set; }
     }
+
+    public class TokenLists
+    {
+        public List<string> SingularWords { get; set; }
+        public List<string> AgregatedWords { get; set; }
+    }
 }
+
